@@ -1,0 +1,228 @@
+---
+const plans = [
+  {
+    title: "Internet 100MB",
+    price: "$20.000",
+    features: ["Fibra Óptica", "WiFi Dual Band", "Instalación Bonificada"],
+    cta: "Contratar",
+    highlight: false
+  },
+  {
+    title: "Pack Full 300MB",
+    price: "$35.000",
+    features: ["Internet 300MB", "TV Digital HD", "Pack Fútbol Incluido", "WiFi 6"],
+    cta: "Lo Más Elegido",
+    highlight: true
+  },
+  {
+    title: "TV Digital",
+    price: "$15.000",
+    features: ["120 Canales", "50 Canales HD", "Pause & Rewind", "App Móvil"],
+    cta: "Contratar",
+    highlight: false
+  }
+];
+---
+
+<section id="planes" class="plans-section">
+  <div class="container">
+    <div class="header text-center">
+      <h2>Nuestros Planes</h2>
+      <p class="promo-text">DESDE $20.000/mes HASTA 300MB</p>
+    </div>
+
+    <div class="plans-grid">
+      {plans.map((plan) => (
+        <div class={`plan-card ${plan.highlight ? 'highlight' : ''}`}>
+          {plan.highlight && <div class="badge">Recomendado</div>}
+          <div class="card-header">
+            <h3>{plan.title}</h3>
+            <div class="price">
+              <span class="amount">{plan.price}</span>
+            </div>
+            <p class="period">por mes</p>
+          </div>
+          <ul class="features">
+            {plan.features.map((feature) => (
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <a href="#" class={`btn ${plan.highlight ? 'btn-accent' : 'btn-outline'}`}>{plan.cta}</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .plans-section {
+    padding: 5rem 0;
+    background-color: var(--color-bg-light);
+  }
+
+  .header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    color: var(--color-blue-primary); /* Fixed: var(--color-primary) -> var(--color-blue-primary) */
+    margin-bottom: 0.5rem;
+  }
+
+  .promo-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-green-accent); /* Fixed: var(--color-success) -> var(--color-green-accent) */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: center; 
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .plan-card {
+    background: white;
+    border-radius: var(--border-radius-xl); /* Fixed: var(--radius-lg) */
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .plan-card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .plan-card.highlight {
+    border: 2px solid var(--color-blue-primary); /* Fixed */
+    transform: scale(1.05);
+    z-index: 2;
+    box-shadow: var(--shadow-xl); /* Fixed: var(--shadow-lg) to xl for more pop */
+  }
+  
+  .plan-card.highlight:hover {
+    transform: scale(1.05) translateY(-5px);
+  }
+
+  .badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-blue-primary); /* Fixed */
+    color: white;
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary); /* Fixed: var(--color-text) */
+  }
+
+  .price {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    color: var(--color-blue-primary); /* Fixed */
+  }
+
+  .amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .period {
+    color: var(--color-text-secondary); /* Fixed */
+    margin-left: 0.25rem;
+    text-align: center;
+  }
+
+  .features {
+    margin-bottom: 2.5rem;
+    flex-grow: 1;
+    list-style: none;
+    padding: 0;
+  }
+
+  .features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-secondary); /* Fixed */
+  }
+
+  .check-icon {
+    color: var(--color-green-accent); /* Fixed */
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  /* Variant Button for non-highlight cards */
+  .btn-outline {
+    background: white;
+    color: var(--color-blue-primary);
+    border: 2px solid var(--color-blue-primary);
+    width: 100%;
+    text-align: center;
+  }
+  
+  .btn-outline:hover {
+    background: var(--color-blue-primary);
+    color: white;
+  }
+
+  .btn-accent {
+    background: var(--color-blue-primary);
+    color: white;
+    border: 2px solid var(--color-blue-primary);
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-accent:hover {
+    background: var(--color-blue-dark);
+    border-color: var(--color-blue-dark);
+  }
+  
+  /* Override full width for buttons in cards */
+  .plan-card .btn {
+    width: 100%;
+    text-align: center;
+    border-radius: 4px; /* Slight radius for these cards */
+  }
+
+  @media (max-width: 768px) {
+    .plan-card.highlight {
+      transform: none;
+    }
+    .plan-card.highlight:hover {
+      transform: translateY(-5px);
+    }
+  }
+</style>

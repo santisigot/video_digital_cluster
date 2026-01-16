@@ -1,0 +1,304 @@
+---
+const menuItems = [
+  { label: 'Inicio', href: '/#inicio' },
+  { label: 'Planes Hogar', href: '/#planes' },
+  { label: 'Internet', href: '/#internet' },
+  { label: 'TV', href: '/#tv' },
+  { label: 'Planes Corporativos', href: '/planes-corporativos' },
+  { label: 'Sobre Nosotros', href: '/#sobre-nosotros' },
+  { label: 'Ubicación', href: '/#ubicacion' }
+];
+---
+
+<nav class="navbar" id="navbar">
+  <div class="container-wide navbar-container">
+    <!-- Logo -->
+    <div class="navbar-logo">
+      <a href="/#inicio" class="brand-link">
+        <img src="/images/logo-videodigital.png" alt="VideoDigital" class="logo-img" />
+        <span class="logo-text">VideoDigital</span>
+      </a>
+    </div>
+
+    <!-- Menu Desktop -->
+    <ul class="navbar-menu desktop-menu">
+      {menuItems.map(item => (
+        <li class="menu-item">
+          <a href={item.href} class="menu-link">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA Button -->
+    <div class="navbar-cta">
+      <a href="/#planes" class="btn btn-primary">
+        Contratar ahora
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-close" style="display: none;">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul class="mobile-menu-list">
+      {menuItems.map(item => (
+        <li class="mobile-menu-item">
+          <a href={item.href} class="mobile-menu-link">
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li class="mobile-menu-item mobile-cta">
+        <a href="/#planes" class="btn btn-primary btn-block">
+          Contratar ahora
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  // Logic for Navbar
+  const navbar = document.getElementById('navbar');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconMenu = mobileMenuBtn?.querySelector('.icon-menu') as HTMLElement;
+  const iconClose = mobileMenuBtn?.querySelector('.icon-close') as HTMLElement;
+  const mobileLinks = document.querySelectorAll('.mobile-menu-link, .btn-block');
+
+  // Scroll effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile Menu Toggle
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('open');
+    const isOpen = mobileMenu?.classList.contains('open');
+    
+    if (isOpen) {
+      iconMenu.style.display = 'none';
+      iconClose.style.display = 'block';
+      mobileMenuBtn.setAttribute('aria-label', 'Cerrar menú');
+    } else {
+      iconMenu.style.display = 'block';
+      iconClose.style.display = 'none';
+      mobileMenuBtn.setAttribute('aria-label', 'Abrir menú');
+    }
+  });
+
+  // Close mobile menu on link click
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.remove('open');
+      iconMenu.style.display = 'block';
+      iconClose.style.display = 'none';
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (!href) return;
+
+      // Check if it's a link to the current page's hash
+      const isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
+      const isHashLink = href.startsWith('#');
+      const isHomeHashLink = href.startsWith('/#');
+
+      // If we are on home and link is hash, or link is home-hash and we are on home
+      if ((isHome && isHashLink) || (isHome && isHomeHashLink)) {
+        e.preventDefault();
+        const targetId = isHashLink ? href.substring(1) : href.substring(2);
+        
+        if (targetId === 'inicio' || targetId === '') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            const navbarHeight = 80;
+            const elementPosition = targetElement.offsetTop - navbarHeight;
+            window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+          }
+        }
+      }
+      // Otherwise allow default navigation (which will go to the other page + hash)
+    });
+  });
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all var(--transition-base);
+    z-index: var(--z-sticky);
+    padding: var(--spacing-lg) 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .navbar.scrolled {
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-md) 0;
+  }
+
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-2xl);
+  }
+
+  /* Logo */
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-img {
+    height: 60px; /* Increased from 48px */
+    width: auto;
+  }
+
+  .logo-text {
+    font-size: 1.75rem; /* Increased font size */
+    font-weight: 800;
+    color: var(--color-blue-primary);
+    transition: color var(--transition-base);
+    letter-spacing: -0.5px;
+  }
+
+  .navbar.scrolled .logo-text {
+    color: var(--color-blue-primary);
+  }
+
+  /* Desktop Menu */
+  .navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xl);
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .menu-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-primary);
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    text-decoration: none;
+    transition: color var(--transition-base);
+    padding: var(--spacing-sm) 0;
+  }
+
+  .menu-link:hover {
+    color: var(--color-green-accent);
+  }
+
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-blue-primary);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-color: var(--color-white);
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+    overflow-y: auto;
+    z-index: var(--z-fixed);
+  }
+
+  .mobile-menu.open {
+    transform: translateX(0);
+  }
+
+  .mobile-menu-list {
+    list-style: none;
+    padding: var(--spacing-lg);
+    margin: 0;
+  }
+
+  .mobile-menu-item {
+    border-bottom: 1px solid var(--color-bg-gray);
+  }
+
+  .mobile-menu-link {
+    display: block;
+    padding: var(--spacing-lg);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-base);
+  }
+
+  .mobile-cta {
+    border: none;
+    padding-top: var(--spacing-lg);
+  }
+
+  .btn-block {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  @media (max-width: 992px) {
+    .desktop-menu,
+    .navbar-cta {
+      display: none;
+    }
+
+    .mobile-menu-btn,
+    .mobile-menu {
+      display: block;
+    }
+  }
+</style>

@@ -1,0 +1,152 @@
+---
+const latitude = '-32.488741851020606';
+const longitude = '-58.26538077300566';
+const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&hl=es&z=16&output=embed`;
+---
+
+<section id="ubicacion" class="section location-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-title">Nuestra Ubicación</h2>
+      <p class="section-subtitle">
+        Visítanos en nuestra oficina principal
+      </p>
+    </div>
+
+    <div class="location-content">
+      <div class="location-info">
+        <h3 class="info-title">Oficina Central</h3>
+        <div class="info-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Intendente Gonzalez 2479</span>
+        </div>
+        <div class="info-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>+54 9 3442 45-7061</span>
+        </div>
+        <div class="info-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span>Lunes a Viernes: 8:00 - 17:00 | Sábado: 8:00 - 12:00</span>
+        </div>
+        <div class="info-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>clientes@videodigital.com.ar</span>
+        </div>
+      </div>
+
+      <div class="map-container">
+        <iframe 
+          src={mapUrl}
+          width="100%" 
+          height="450" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .location-section {
+    background-color: var(--color-bg-light);
+  }
+
+  .section-title {
+    color: var(--color-blue-primary);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .section-subtitle {
+     color: var(--color-text-secondary);
+     font-size: var(--font-size-lg);
+  }
+
+  .location-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-3xl);
+    margin-top: var(--spacing-3xl);
+  }
+
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .info-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-base);
+  }
+
+  .info-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(5px);
+  }
+
+  .info-item svg {
+    flex-shrink: 0;
+    color: var(--color-blue-primary);
+  }
+
+  .info-item span {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .map-container {
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    height: 450px;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .location-content {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+    }
+
+    .map-container {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .map-container {
+      height: 350px;
+    }
+  }
+</style>

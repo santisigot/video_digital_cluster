@@ -1,0 +1,313 @@
+---
+const slides = [
+  {
+    title: 'Internet por Fibra Óptica',
+    subtitle: 'Velocidad real para tu día a día',
+    image: '/images/hero-internet.png',
+    ctaText: 'Conocer Planes',
+    ctaColor: 'blue'
+  },
+  {
+    title: 'TV Digital y Streaming',
+    subtitle: 'Todo el entretenimiento en un solo lugar',
+    image: '/images/hero-tv.png',
+    ctaText: 'Ver Canales',
+    ctaColor: 'red'
+  },
+  {
+    title: 'Soluciones para Empresas',
+    subtitle: 'Conectividad profesional sin interrupciones',
+    image: '/images/hero-empresas.png',
+    ctaText: 'Contáctanos',
+    ctaColor: 'blue'
+  }
+];
+---
+
+<div class="hero-carousel" id="hero-carousel">
+  <div class="slides-container">
+    {slides.map((slide, index) => (
+      <div class={`slide ${index === 0 ? 'active' : ''}`} data-index={index}>
+        <!-- Imagen de fondo con overlay sutil -->
+        <div class="slide-background" style={`background-image: url(${slide.image})`}></div>
+        <div class="slide-overlay"></div>
+        
+        <div class="container slide-content">
+          <div class="content-wrapper">
+            <!-- Texto principal -->
+            <div class="text-content">
+              <h1 class="slide-title" data-slide={index}>
+                {slide.title}
+              </h1>
+              <p class="slide-subtitle">
+                {slide.subtitle}
+              </p>
+              <div class="slide-actions">
+                <button 
+                  class={`btn btn-large ${slide.ctaColor === 'blue' ? 'btn-primary' : 'btn-red'} hero-cta`}
+                  data-action={slide.ctaText === 'Contáctanos' ? 'contact' : 'scroll'}
+                >
+                  {slide.ctaText}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Indicadores minimalistas -->
+  <div class="carousel-indicators">
+    {slides.map((slide, index) => (
+      <button 
+        class={`indicator ${index === 0 ? 'active' : ''}`}
+        data-index={index}
+        aria-label={`Ir a ${slide.title}`}
+      >
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const indicators = document.querySelectorAll('.indicator');
+  const totalSlides = slides.length;
+  let autoplayInterval: any;
+
+  function showSlide(index: number) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    indicators.forEach(ind => ind.classList.remove('active'));
+
+    slides[index].classList.add('active');
+    indicators[index].classList.add('active');
+    currentSlide = index;
+  }
+
+  function nextSlide() {
+    showSlide((currentSlide + 1) % totalSlides);
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoplay() {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+  }
+
+  // Event Listeners
+  indicators.forEach(indicator => {
+    indicator.addEventListener('click', () => {
+      const index = parseInt(indicator.getAttribute('data-index') || '0');
+      stopAutoplay();
+      showSlide(index);
+      startAutoplay();
+    });
+  });
+
+  // CTA Click Handlers
+  document.querySelectorAll('.hero-cta').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const action = (e.target as HTMLElement).getAttribute('data-action');
+      if (action === 'scroll') {
+        const plansSection = document.getElementById('planes');
+        plansSection?.scrollIntoView({ behavior: 'smooth' });
+      } else if (action === 'contact') {
+         window.location.href = '/planes-corporativos';
+      }
+    });
+  });
+
+  // Start
+  startAutoplay();
+</script>
+
+<style>
+  .hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 650px;
+    max-height: 900px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+  }
+
+  .slides-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: flex;
+    align-items: center;
+    pointer-events: none; /* Evitar clicks en slides ocultos */
+    z-index: 0;
+  }
+
+  .slide.active {
+    opacity: 1;
+    z-index: 1;
+    pointer-events: auto;
+  }
+
+  /* Fondo difuminado moderno */
+  .slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Fallback gradient */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    filter: blur(8px);
+    transform: scale(1.1);
+  }
+
+  /* Overlay */
+  .slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+  }
+
+  .slide-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .content-wrapper {
+    max-width: 700px;
+    /* animation handled by global keyframes or JS if preferred, 
+       but here we can keep it static or rely on global CSS animations */
+       animation: fadeInUp 1s ease-out;
+  }
+
+  /* Tipografía */
+  .slide-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #1a1a1a;
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: -0.02em;
+  }
+
+  /* Diferentes colores por slide */
+  .slide-title[data-slide="0"] { color: var(--color-blue-primary); }
+  .slide-title[data-slide="1"] { color: var(--color-text-primary); }
+  .slide-title[data-slide="2"] { color: var(--color-blue-dark); }
+
+  .slide-subtitle {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    line-height: 1.6;
+    color: #666666;
+    margin-bottom: var(--spacing-3xl);
+    font-weight: 400;
+    max-width: 600px;
+  }
+
+  .slide-actions {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .btn-large {
+    font-size: var(--font-size-lg);
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Indicadores */
+  .carousel-indicators {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+  }
+
+  .indicator {
+    width: 40px;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .indicator:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .indicator.active {
+    background-color: var(--color-blue-primary);
+    width: 60px;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .hero-carousel { min-height: 600px; }
+    .slide-subtitle { font-size: 1.125rem; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-carousel { height: 90vh; min-height: 550px; }
+    .content-wrapper { max-width: 100%; }
+    .slide-title { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: var(--spacing-md); }
+    .slide-subtitle { font-size: 1rem; margin-bottom: var(--spacing-2xl); }
+    .btn-large { padding: 16px 32px; font-size: var(--font-size-base); }
+    .carousel-indicators { bottom: 40px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-carousel { min-height: 500px; }
+    .slide-title { font-size: 2rem; }
+    .slide-subtitle { font-size: 0.938rem; }
+    .btn-large { width: 100%; padding: 14px 24px; }
+    .indicator { width: 30px; }
+    .indicator.active { width: 50px; }
+  }
+</style>

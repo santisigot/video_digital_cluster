@@ -1,0 +1,178 @@
+---
+const features = [
+  {
+    icon: 'speed',
+    title: 'Velocidad Garantizada',
+    description: 'Hasta 1 Gbps de velocidad simétrica real'
+  },
+  {
+    icon: 'fiber',
+    title: 'Fibra Óptica 100%',
+    description: 'Tecnología de última generación directa hasta tu hogar'
+  },
+  {
+    icon: 'unlimited',
+    title: 'Sin Límites de Datos',
+    description: 'Navegación ilimitada sin restricciones ni cargos extra'
+  },
+  {
+    icon: 'wifi',
+    title: 'WiFi de Alta Potencia',
+    description: 'Router tri-band incluido para máxima cobertura'
+  }
+];
+---
+
+<section id="internet" class="section internet-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-title">Internet de Fibra Óptica</h2>
+      <p class="section-subtitle">
+        Conexión ultra rápida y confiable para tu hogar o empresa
+      </p>
+    </div>
+
+    <div class="internet-content">
+      <div class="internet-features">
+        {features.map(feature => (
+          <div class="internet-feature-card">
+            <div class="feature-icon-wrapper">
+              {feature.icon === 'speed' && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+              )}
+              {feature.icon === 'fiber' && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+              )}
+              {feature.icon === 'unlimited' && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18.178 8C19.58 8 21 9.646 21 11.5S19.58 15 18.178 15c-1.4 0-2.963-1.286-4.678-3.5C11.785 9.286 10.222 8 8.822 8 7.42 8 6 9.646 6 11.5S7.42 15 8.822 15c1.4 0 2.963-1.286 4.678-3.5"/>
+                </svg>
+              )}
+              {feature.icon === 'wifi' && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                  <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                  <line x1="12" y1="20" x2="12.01" y2="20"/>
+                </svg>
+              )}
+            </div>
+            <h3 class="feature-title">{feature.title}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="internet-image">
+        <img src="/images/hero-internet.png" alt="Internet Fibra Óptica" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .internet-section {
+    background-color: var(--color-white);
+  }
+
+  .section-title {
+    color: var(--color-blue-primary);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .section-subtitle {
+     color: var(--color-text-secondary);
+     font-size: var(--font-size-lg);
+  }
+
+  .internet-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+    margin-top: var(--spacing-3xl);
+  }
+
+  .internet-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .internet-feature-card {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    padding: var(--spacing-lg);
+    background-color: var(--color-bg-light);
+    border-radius: var(--border-radius-lg);
+    transition: all var(--transition-base);
+    border-left: 4px solid transparent;
+  }
+
+  .internet-feature-card:hover {
+    border-left-color: var(--color-blue-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateX(8px);
+    background-color: var(--color-white);
+  }
+
+  .feature-icon-wrapper {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-blue-primary), var(--color-blue-dark));
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .feature-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .feature-description {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .internet-image {
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .internet-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .internet-content {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .internet-feature-card {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  }
+</style>

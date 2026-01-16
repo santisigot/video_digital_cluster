@@ -1,0 +1,186 @@
+---
+const features = [
+  {
+    icon: 'channels',
+    title: '150+ Canales',
+    description: 'Acceso a los mejores canales de TV en HD y 4K'
+  },
+  {
+    icon: 'streaming',
+    title: 'Streaming Incluido',
+    description: 'Integración con plataformas como Netflix, Prime Video y más'
+  },
+  {
+    icon: 'sports',
+    title: 'Deportes en Vivo',
+    description: 'Todos los partidos y eventos deportivos en tiempo real'
+  },
+  {
+    icon: 'movies',
+    title: 'Cine y Series',
+    description: 'Miles de películas y series on demand'
+  }
+];
+---
+
+<section id="tv" class="section tv-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-title">TV Digital y Streaming</h2>
+      <p class="section-subtitle">
+        Entretenimiento ilimitado para toda la familia
+      </p>
+    </div>
+
+    <div class="tv-content">
+      <div class="tv-image">
+        <img src="/images/hero-tv.png" alt="TV Digital" loading="lazy">
+      </div>
+
+      <div class="tv-features">
+        {features.map(feature => (
+          <div class="tv-feature-card">
+            <div class="feature-icon-wrapper">
+              {feature.icon === 'channels' && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+                  <polyline points="17 2 12 7 7 2"/>
+                </svg>
+              )}
+              {feature.icon === 'streaming' && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              )}
+              {feature.icon === 'sports' && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                  <path d="M2 12h20"/>
+                </svg>
+              )}
+              {feature.icon === 'movies' && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                  <line x1="7" y1="2" x2="7" y2="22"/>
+                  <line x1="17" y1="2" x2="17" y2="22"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <line x1="2" y1="7" x2="7" y2="7"/>
+                  <line x1="2" y1="17" x2="7" y2="17"/>
+                  <line x1="17" y1="17" x2="22" y2="17"/>
+                  <line x1="17" y1="7" x2="22" y2="7"/>
+                </svg>
+              )}
+            </div>
+            <h3 class="feature-title">{feature.title}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tv-section {
+    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-bg-light) 100%);
+  }
+
+  .section-title {
+    color: var(--color-red-cta);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .section-subtitle {
+     color: var(--color-text-secondary);
+     font-size: var(--font-size-lg);
+  }
+
+  .tv-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+    margin-top: var(--spacing-3xl);
+  }
+
+  .tv-image {
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .tv-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .tv-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .tv-feature-card {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    padding: var(--spacing-lg);
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    transition: all var(--transition-base);
+    border-left: 4px solid transparent;
+  }
+
+  .tv-feature-card:hover {
+    border-left-color: var(--color-red-cta);
+    box-shadow: var(--shadow-md);
+    transform: translateX(8px);
+  }
+
+  .feature-icon-wrapper {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-red-cta), var(--color-red-dark));
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .feature-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .feature-description {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .tv-content {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+    }
+
+    .tv-image {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tv-feature-card {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  }
+</style>

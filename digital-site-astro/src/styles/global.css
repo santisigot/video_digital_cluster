@@ -1,0 +1,356 @@
+/* ==========================================
+   ESTILOS GLOBALES - LANDING PAGE TELECOMUNICACIONES
+   ========================================== */
+
+/* Importar fuentes de Google */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================
+   VARIABLES CSS - PALETA DE COLORES
+   ========================================== */
+:root {
+  /* Colores principales */
+  --color-white: #ffffff;
+  --color-blue-primary: #0066cc;
+  --color-blue-dark: #004d99;
+  --color-blue-light: #3385d6;
+  --color-green-accent: #00cc66;
+  --color-green-light: #33d685;
+  --color-red-cta: #e63946;
+  --color-red-dark: #cc2936;
+
+  /* Colores de texto */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #666666;
+  --color-text-light: #999999;
+
+  /* Colores de fondo */
+  --color-bg-light: #f8f9fa;
+  --color-bg-gray: #e9ecef;
+
+  /* Gradientes */
+  --gradient-blue: linear-gradient(
+    135deg,
+    var(--color-blue-light) 0%,
+    var(--color-blue-primary) 100%
+  );
+  --gradient-hero: linear-gradient(135deg, rgba(0, 102, 204, 0.95) 0%, rgba(0, 77, 153, 0.95) 100%);
+
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+
+  /* Tipografía */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
+  --font-size-5xl: 3rem; /* 48px */
+  --font-size-6xl: 3.75rem; /* 60px */
+
+  /* Espaciado */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-2xl: 3rem; /* 48px */
+  --spacing-3xl: 4rem; /* 64px */
+  --spacing-4xl: 6rem; /* 96px */
+
+  /* Bordes */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-full: 9999px;
+
+  /* Transiciones */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* ==========================================
+   RESET Y BASE
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-white);
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   TIPOGRAFÍA
+   ========================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+}
+
+h3 {
+  font-size: var(--font-size-3xl);
+}
+
+h4 {
+  font-size: var(--font-size-2xl);
+}
+
+h5 {
+  font-size: var(--font-size-xl);
+}
+
+h6 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: var(--color-blue-primary);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+a:hover {
+  color: var(--color-blue-dark);
+}
+
+/* ==========================================
+   UTILIDADES GLOBALES
+   ========================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.section {
+  padding: var(--spacing-4xl) 0;
+}
+
+.section-sm {
+  padding: var(--spacing-2xl) 0;
+}
+
+.section-lg {
+  padding: var(--spacing-4xl) 0;
+}
+
+/* Textos */
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--color-blue-primary);
+}
+
+.text-white {
+  color: var(--color-white);
+}
+
+/* Botones base */
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid transparent;
+  border-radius: 0; /* Cuadrados */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+.btn-primary {
+  border-color: var(--color-blue-primary);
+  color: var(--color-blue-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-blue-primary);
+  color: var(--color-white);
+  box-shadow: 0 5px 15px rgba(0, 102, 204, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-red {
+  border-color: var(--color-red-cta);
+  color: var(--color-red-cta);
+}
+
+.btn-red:hover {
+  background-color: var(--color-red-cta);
+  color: var(--color-white);
+  box-shadow: 0 5px 15px rgba(230, 57, 70, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border-color: var(--color-text-secondary);
+  color: var(--color-text-secondary);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-blue-primary);
+  color: var(--color-blue-primary);
+  transform: translateY(-2px);
+}
+
+.btn-lg {
+  padding: 16px 40px;
+  font-size: 1.125rem;
+  border-width: 2px;
+}
+
+/* ==========================================
+   ANIMACIONES
+   ========================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  :root {
+    --font-size-5xl: 2.25rem; /* 36px en móvil */
+    --font-size-4xl: 1.875rem; /* 30px en móvil */
+    --font-size-3xl: 1.5rem; /* 24px en móvil */
+  }
+
+  .container,
+  .container-wide {
+    padding: 0 var(--spacing-md);
+  }
+
+  .section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .btn-lg {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-5xl: 1.875rem; /* 30px en móvil pequeño */
+    --font-size-4xl: 1.5rem; /* 24px en móvil pequeño */
+  }
+}
